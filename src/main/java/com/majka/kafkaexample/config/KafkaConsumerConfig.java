@@ -32,9 +32,11 @@ public class KafkaConsumerConfig {
 
     @Bean
     public ConsumerFactory<String, Message> consumerFactory(){
+        JsonDeserializer<Message> jsonDeserializer = new JsonDeserializer<>();
+        jsonDeserializer.addTrustedPackages("com.majka.kafkaexample");
         return new DefaultKafkaConsumerFactory<>(consumerConfig(),
                 new StringDeserializer(),
-                new JsonDeserializer<>());
+                jsonDeserializer);
     }
 
     @Bean
